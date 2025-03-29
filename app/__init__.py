@@ -2,6 +2,7 @@ from flask import Flask
 from dotenv import load_dotenv
 from app.models import db
 from flask_migrate import Migrate
+from app.routes import main
 import os
 
 # Load environment variables
@@ -24,5 +25,9 @@ def create_app():
     # Initialize database and migrations
     db.init_app(app)
     Migrate(app, db)
+    
+    # Register Blueprints for modular routing
+    from app.routes import main 
+    app.register_blueprint(main)
     
     return app
