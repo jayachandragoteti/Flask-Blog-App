@@ -1,6 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Home | Blog{% endblock %}
+
+{% block title %}Home - My Blog{% endblock %}
+
 {% block content %}
-<h1>Welcome to My Blog</h1>
-<p>This is the home page.</p>
+<div class="container text-center">
+    <h1 class="mt-4">Welcome to My Blog</h1>
+    <p class="lead">Your go-to place for amazing content.</p>
+
+    {% if session.get('login_user') %}
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+    {% else %}
+        <a href="{{ url_for('auth.login_user') }}" class="btn btn-success btn-lg">Login</a>
+        <a href="{{ url_for('auth.register_user') }}" class="btn btn-primary btn-lg">Sign Up</a>
+    {% endif %}
+</div>
 {% endblock %}

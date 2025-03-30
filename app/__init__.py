@@ -1,12 +1,13 @@
+import os
 from flask import Flask
 from dotenv import load_dotenv
-from app.models import db
-from flask_migrate import Migrate
-from app.routes import main
-import os
 
 # Load environment variables
-load_dotenv()
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(dotenv_path=os.path.join(BASE_DIR, ".env"))
+
+# Import extensions
+from app.extensions import db, migrate
 
 def create_app():
     """
@@ -19,15 +20,18 @@ def create_app():
         static_url_path='/'
     )
     
-    # Configure the database URI
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///default.db")
+    # Configure app settings
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(BASE_DIR, 'db/blog_app_db.db')}"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "default_secret_key")
     
-    # Initialize database and migrations
+    # Initialize extensions
     db.init_app(app)
-    Migrate(app, db)
-    
-    # Register Blueprints for modular routing
-    from app.routes import main 
+    migrate.init_app(app, db)
+
+    # Register Blueprints
+    from app.routes import main, auth  
     app.register_blueprint(main)
-    
+    app.register_blueprint(auth)
+
     return app

@@ -1,5 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
+from app.models.Users import Users
 
-# Create a SQLAlchemy instance to handle database interactions
-# This will be initialized with the Flask app in app/__init__.py
-db = SQLAlchemy()
+# Explicitly expose models when imported
+__all__ = ["db", "Users"]

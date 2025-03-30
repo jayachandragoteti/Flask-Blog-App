@@ -15,23 +15,35 @@ A simple blog application built using Flask, featuring user authentication, CRUD
 flask-blog-app/
 │── app/
 │   ├── __init__.py          # Flask app factory
-│   ├── models/
+│   ├── extensions.py        # Initialize extensions (SQLAlchemy, JWT, etc.)
+│   ├── models/              # Database models
 │   │   ├── __init__.py      # Initialize models
 │   │   ├── user.py          # User model
 │   │   ├── post.py          # Blog post model
-│   │   ├── comment.py       # Comment model (optional)
-│   ├── routes/
+│   │   ├── comment.py       # Comment model
+│   ├── routes/              # Routes (views/controllers)
 │   │   ├── __init__.py      # Blueprint registration
-│   │   ├── auth.py          # Login, logout, signup
-│   │   ├── blog.py          # Blog CRUD operations
+│   │   ├── auth.py          # Authentication routes
+│   │   ├── main.py          # Blog post routes
+│   │   ├── user.py          # User profile routes (optional)
 │   ├── templates/           # HTML templates
+│   │   ├── auth/            # Auth-related templates
+│   │   ├── blog/            # Blog post templates
 │   ├── static/              # CSS, JS, images
+│   │   ├── css/             # CSS
+│   │   ├── js/              # js
+│   │   ├── img/             # images
 │── migrations/              # Flask-Migrate files
-│── config.py                # Configuration settings
+│── config/                  # Configurations
+│   ├── __init__.py
+│   ├── development.py       # Development config
+│   ├── production.py        # Production config
 │── run.py                   # Entry point to run Flask app
 │── requirements.txt         # Project dependencies
 │── .env                     # Environment variables
+│── .gitignore               # Ignore unnecessary files
 │── README.md                # Project documentation
+
 ```
 
 ## Installation
