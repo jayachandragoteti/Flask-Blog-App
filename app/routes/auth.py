@@ -41,7 +41,7 @@ def login_user():
 
         if not check_user:
             flash("No account found with this email. Please register.", "warning")
-            return redirect(url_for("auth.register"))
+            return redirect(url_for("auth.register_user"))
 
         if not check_user.check_password(password):
             flash("Incorrect password. Please try again.", "danger")

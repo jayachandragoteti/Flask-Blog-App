@@ -11,7 +11,7 @@ class Users(db.Model):
     dob = db.Column(db.Date, nullable=True)
     gender = db.Column(db.String(10), nullable=True)
     address = db.Column(db.String(500), nullable=True)
-    profile_picture = db.Column(db.String(255), nullable=True, default="avatar.jpg")
+    profile_picture = db.Column(db.String(255), nullable=True, default="avatar.png")
     role = db.Column(db.String(20), nullable=False, default="user")
     is_active = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
