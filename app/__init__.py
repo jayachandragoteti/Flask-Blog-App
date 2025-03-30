@@ -30,8 +30,9 @@ def create_app():
     migrate.init_app(app, db)
 
     # Register Blueprints
-    from app.routes import main, auth  
+    from app.routes import main, auth, blog 
     app.register_blueprint(main)
     app.register_blueprint(auth)
+    app.register_blueprint(blog)
 
     return app

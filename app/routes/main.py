@@ -4,7 +4,7 @@ import os
 from flask import Blueprint, request, render_template, redirect, url_for, session, flash
 from werkzeug.utils import secure_filename
 from app.utils import login_required 
-from app.models import Users
+from app.models import Users, Blog
 from app.extensions import db
 from datetime import datetime
 
@@ -12,7 +12,9 @@ main = Blueprint("main", __name__)
 
 @main.route("/")
 def index():
-    return render_template("index.html")
+    blogs = Blog.query.order_by(Blog.created_at.desc()).all() 
+    return render_template("index.html", blogs=blogs)
+
 
 @main.route("/about")
 def about():
@@ -24,6 +26,7 @@ def contact():
     return render_template("index.html")
 
 @main.route("/dashboard")
+@login_required
 def dashboard():
     return render_template("index.html")
 

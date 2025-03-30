@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Add Blog - My Blog{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Create a New Blog Post</h2>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('blog.add_blog') }}" method="POST" enctype="multipart/form-data">
+        <!-- Title -->
+        <div class="mb-3">
+            <label class="form-label">Blog Title</label>
+            <input type="text" class="form-control" name="title" placeholder="Enter blog title" required>
+        </div>
+
+        <!-- Short Description -->
+        <div class="mb-3">
+            <label class="form-label">Short Description</label>
+            <textarea class="form-control" name="description_text" rows="3" placeholder="Enter a short description" required></textarea>
+        </div>
+
+        <!-- Content -->
+        <div class="mb-3">
+            <label class="form-label">Blog Content</label>
+            <textarea class="form-control" name="description_content" rows="6" placeholder="Enter detailed content"></textarea>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="mb-3">
+            <label class="form-label">Upload Images</label>
+            <input type="file" class="form-control" name="images" multiple accept=".png, .jpg, .jpeg, .gif">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100">Publish Blog</button>
+    </form>
+</div>
+{% endblock %}
